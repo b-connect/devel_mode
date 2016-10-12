@@ -20,7 +20,6 @@ class DevelModeBinNull implements CompilerPassInterface {
     $defaults['render'] = 'cache.backend.devel_mode_null';
     $defaults['menu'] = 'cache.backend.devel_mode_null';
     $defaults['dynamic_page_cache']  = 'cache.backend.devel_mode_null';
-    $container->setParameter('system.logging','verbose');
     $container->setParameter('cache_default_bin_backends', $defaults);
   }
 
