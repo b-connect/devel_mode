@@ -1,0 +1,3 @@
+devel_mode:
+  twig_debug: 1
+  twig_auto_load: 1
