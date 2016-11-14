@@ -19,8 +19,8 @@ class ConfigOverride implements ConfigFactoryOverrideInterface, ConfigOverrideIn
     $overrides = array();
     if (in_array('system.performance', $names)) {
       $overrides['system.performance'] = [
-        'css' => ['preprocess' => TRUE],
-        'js'  => ['preprocess' => TRUE],
+        'css' => ['preprocess' => FALSE],
+        'js'  => ['preprocess' => FALSE],
       ];
     }
     return $overrides;
