@@ -18,7 +18,7 @@ config.devel_mode:
   modules:
     - devel
     - webprofiler
-  cache.bins:
+  cache.bin:
     - render
   twig:
     debug: TRUE
