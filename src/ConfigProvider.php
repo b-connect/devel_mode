@@ -18,7 +18,7 @@ class ConfigProvider implements ConfigProviderInterface {
     if (!$container) {
       $container = \Drupal::getContainer();
     }
-    if ($container->hasParamater('devel_mode.config')) {
+    if ($container->hasParameter('devel_mode.config')) {
       $develModeConfig = $container->getParameter('devel_mode.config');
       $config = NestedArray::mergeDeep($config, $develModeConfig);
     }
