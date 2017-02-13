@@ -12,16 +12,33 @@ use Drupal\Core\Config\ConfigFactoryOverrideInterface;
  */
 class ConfigOverride implements ConfigFactoryOverrideInterface, ConfigOverrideInterface {
 
+  protected $configProvider;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ConfigProvider $config) {
+    $this->configProvider = $config;
+  }
+
   /**
    * {@inheritdoc}
    */
   public function loadOverrides($names) {
     $overrides = array();
     if (in_array('system.performance', $names)) {
-      $overrides['system.performance'] = [
-        'css' => ['preprocess' => FALSE],
-        'js'  => ['preprocess' => FALSE],
-      ];
+      $configs = $this->configProvider->getConfigs();
+      $overrides['system.performance'] = [];
+      if ($configs['disable_preprocess_js']) {
+        $overrides['system.performance'] += [
+          'js' => ['preprocess' => FALSE],
+        ];
+      }
+      if ($configs['disable_preprocess_css']) {
+        $overrides['system.performance'] += [
+          'css' => ['preprocess' => FALSE],
+        ];
+      }
     }
     return $overrides;
   }
@@ -41,8 +58,8 @@ class ConfigOverride implements ConfigFactoryOverrideInterface, ConfigOverrideIn
   }
 
   /**
- * {@inheritdoc}
- */
+   * {@inheritdoc}
+   */
   public function createConfigObject($name, $collection = StorageInterface::DEFAULT_COLLECTION) {
     return NULL;
   }

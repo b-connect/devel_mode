@@ -8,3 +8,15 @@ Helper module for debugging purposes
 - Enable twig autoload
 - Disable twig cache
 - Enable drupal cache headers for debugging
+
+
+
+```
+parameters:
+  config.devel_mode:
+    disable_preprocess_js: TRUE
+    disable_preprocess_css: TRUE
+    modules:
+      - devel
+      - webprofiler
+```
