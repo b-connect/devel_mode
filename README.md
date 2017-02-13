@@ -9,7 +9,25 @@ Helper module for debugging purposes
 - Disable twig cache
 - Enable drupal cache headers for debugging
 
+## defaults
 
+```
+config.devel_mode:
+  disable_preprocess_js: TRUE
+  disable_preprocess_css: TRUE
+  modules:
+    - devel
+    - webprofiler
+  cache.bins:
+    - render
+  twig:
+    debug: TRUE
+    auto_reload: TRUE
+    cache: FALSE
+```
+
+
+## Enable in services.yml
 
 ```
 parameters:
@@ -19,4 +37,5 @@ parameters:
     modules:
       - devel
       - webprofiler
+  .....
 ```

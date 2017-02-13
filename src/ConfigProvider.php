@@ -13,10 +13,13 @@ class ConfigProvider implements ConfigProviderInterface {
   /**
    * {@inheritdoc}
    */
-  public function getConfigs() {
+  public function getConfigs($container = NULL) {
     $config = $this->getDefaultConfigs();
+    if (!$container) {
+      $container = \Drupal::getContainer();
+    }
     try {
-      $develModeConfig = \Drupal::getContainer()->getParameter('devel_mode.config');
+      $develModeConfig = $container->getParameter('devel_mode.config');
       $config = NestedArray::mergeDeep($config, $develModeConfig);
     }
     catch (ParameterNotFoundException $ex) {
@@ -40,6 +43,9 @@ class ConfigProvider implements ConfigProviderInterface {
         'debug' => TRUE,
         'auto_reload' => TRUE,
         'cache' => FALSE,
+      ],
+      'cache.bin' => [
+        'render',
       ],
     ];
   }

@@ -26,9 +26,16 @@ class ConfigOverride implements ConfigFactoryOverrideInterface, ConfigOverrideIn
    */
   public function loadOverrides($names) {
     $overrides = array();
+    if (in_array('system.logging', $names)) {
+      $overrides['system.logging'] = [
+        'error_level' => 'verbose',
+      ];
+    }
     if (in_array('system.performance', $names)) {
       $configs = $this->configProvider->getConfigs();
-      $overrides['system.performance'] = [];
+      $overrides['system.performance'] = [
+        'cache' => ['page' => ['max_age' => 0]],
+      ];
       if ($configs['disable_preprocess_js']) {
         $overrides['system.performance'] += [
           'js' => ['preprocess' => FALSE],
