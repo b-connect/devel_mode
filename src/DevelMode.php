@@ -32,7 +32,8 @@ class DevelMode implements CompilerPassInterface {
       return;
     }
     foreach (array_keys($container->findTaggedServiceIds('cache.bin')) as $id) {
-      $bin = array_pop(explode('.', $id));
+      $bin = explode('.', $id);
+      $bin = array_pop($bin);
       if (in_array($bin, $configs['cache.bin'])) {
         $defaults[$bin] = 'cache.backend.devel_mode_null';
       }
